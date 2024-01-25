@@ -6,6 +6,9 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"time"
+
+	"github.com/fatih/color"
 )
 
 // Struct to store data from API
@@ -58,5 +61,41 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println(weather)
+
+	location, hours, current := weather.Location, weather.Forecast.Forecasatday[0].Hour, weather.Current
+
+	headerMessage := fmt.Sprintf("%s,%s:%0.f°C,%s\n",
+		location.Name,
+		location.Country,
+		current.Temp_c,
+		current.Condition.Text,
+	)
+
+	coloredHeader := color.YellowString(headerMessage)
+
+	fmt.Print(coloredHeader)
+	fmt.Println("Hour - Degree", "\tChance Rain", "\tCondition")
+
+	for _, hour := range hours {
+		date := time.Unix(int64(hour.Time_epoch), 0)
+
+		if date.Before(time.Now()) {
+			continue
+		}
+
+		message := fmt.Sprintf("%s - %0.f°C,\t%0.f%%,\t\t%s\n",
+			date.Format("15:04"),
+			hour.Temp_c,
+			hour.Chance_of_rain,
+			hour.Condition.Text,
+		)
+
+		if hour.Chance_of_rain < 45 {
+			fmt.Print(message)
+		} else if hour.Chance_of_rain <= 60 {
+			color.Cyan(message)
+		} else {
+			color.Blue(message)
+		}
+	}
 }
