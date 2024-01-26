@@ -14,7 +14,8 @@ The Weather CLI App is a command-line interface (CLI) application built with Go.
     ```
     go get -u github.com/fatih/color
     ```
-3. Set up environment variables based on your own weather API.
+3. Set up environment variables based on your own weather API. Save your own json key into your env. The api key is located at your own account of Weather API.
+   ![Version 1](./example/api_key.png)
 
 ## Usage
 
