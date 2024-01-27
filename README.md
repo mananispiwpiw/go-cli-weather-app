@@ -31,6 +31,7 @@ Make sure to follow the installation steps before running the application.
 
 ### Version 1
 
+When we simply run "go run main.go", the result is as below :
 ![Version 1](./example/version1.png)
 
 ## Dependencies
