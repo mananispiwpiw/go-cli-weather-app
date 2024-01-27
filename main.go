@@ -70,17 +70,46 @@ func main() {
 
 	location, hours, current := weather.Location, weather.Forecast.Forecasatday[0].Hour, weather.Current
 
-	headerMessage := fmt.Sprintf("%s,%s:%0.f°C,%s\n",
+	headerMessage := fmt.Sprintf("\n%s,%s:%0.f°C UV %0.f,Condition: %s\n",
 		location.Name,
 		location.Country,
 		current.Temp_c,
+		current.Uv,
 		current.Condition.Text,
 	)
 
 	coloredHeader := color.YellowString(headerMessage)
 
 	fmt.Print(coloredHeader)
-	fmt.Println("Hour - Degree", "\tChance Rain", "\tCondition")
+
+	//Header style
+	hourDegreeWidth := 15
+	chanceRainWidth := 15
+	conditionWidth := 30
+	//fmt.Println("Hour - Degree|", "\tChance Rain", "\tCondition \t\t|")
+
+	header := fmt.Sprintf("|%-*s|%-*s|%-*s|\n",
+		hourDegreeWidth, "Hour - Degree",
+		chanceRainWidth, "Chance Rain",
+		conditionWidth, "Condition")
+
+	//Header Upper Border
+	for i := 0; i < len(header)-1; i++ {
+		fmt.Print("-")
+	}
+	//Craete Space
+	fmt.Println()
+
+	//Header itself
+	fmt.Print(header)
+
+	//Header Bottom Border
+	for i := 0; i < len(header)-1; i++ {
+		fmt.Print("-")
+	}
+
+	//Create Space
+	fmt.Println("")
 
 	for _, hour := range hours {
 		date := time.Unix(int64(hour.Time_epoch), 0)
@@ -89,11 +118,16 @@ func main() {
 			continue
 		}
 
-		message := fmt.Sprintf("%s - %0.f°C,\t%0.f%%,\t\t%s\n",
-			date.Format("15:04"),
-			hour.Temp_c,
-			hour.Chance_of_rain,
-			hour.Condition.Text,
+		//Store hour and degree as a string value
+		hourDegree := fmt.Sprintf("%s - %0.f°C", date.Format("15:04"), hour.Temp_c)
+		//Store chance rain value
+		chanceRain := fmt.Sprintf("%0.0f%%", hour.Chance_of_rain)
+
+		//%0.f%%
+		message := fmt.Sprintf("|%-*s|%-*s|%-*s|\n",
+			hourDegreeWidth, hourDegree,
+			chanceRainWidth, chanceRain,
+			conditionWidth, hour.Condition.Text,
 		)
 
 		if hour.Chance_of_rain < 45 {
@@ -104,4 +138,12 @@ func main() {
 			color.Blue(message)
 		}
 	}
+
+	//Table Bottom Border
+	for i := 0; i < len(header)-1; i++ {
+		fmt.Print("-")
+	}
+	//Create Space
+	fmt.Println()
+
 }
