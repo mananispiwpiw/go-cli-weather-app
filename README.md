@@ -34,6 +34,13 @@ Make sure to follow the installation steps before running the application.
 When we simply run "go run main.go", the result is as below :
 ![Version 1](./example/version1.png)
 
+### Version 1.1
+
+-   Add Logic For Argument, so we can put the city we desired
+-   Fixing some style
+
+![Version 1.1](./example/version1_1.png)
+
 ## Dependencies
 
 -   fatih/color - Package for adding color to your terminal text.
