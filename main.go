@@ -46,7 +46,6 @@ func main() {
 	apiURL := fmt.Sprintf("http://api.weatherapi.com/v1/forecast.json?key=%s&q=%s&days=1&aqi=no&alerts=no", os.Getenv("WEATHER_API_URL_1"), city)
 
 	res, err := http.Get(apiURL)
-	//res, err := http.Get("http://api.weatherapi.com/v1/forecast.json?key=c01fc842f0664034bda42040242501&q=Dubai&days=1&aqi=no&alerts=no")
 	if err != nil {
 		panic(err)
 	}
@@ -137,6 +136,7 @@ func main() {
 		} else {
 			color.Blue(message)
 		}
+		time.Sleep(10)
 	}
 
 	//Table Bottom Border
