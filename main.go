@@ -85,7 +85,6 @@ func main() {
 	hourDegreeWidth := 15
 	chanceRainWidth := 15
 	conditionWidth := 30
-	//fmt.Println("Hour - Degree|", "\tChance Rain", "\tCondition \t\t|")
 
 	header := fmt.Sprintf("|%-*s|%-*s|%-*s|\n",
 		hourDegreeWidth, "Hour - Degree",
@@ -122,7 +121,6 @@ func main() {
 		//Store chance rain value
 		chanceRain := fmt.Sprintf("%0.0f%%", hour.Chance_of_rain)
 
-		//%0.f%%
 		message := fmt.Sprintf("|%-*s|%-*s|%-*s|\n",
 			hourDegreeWidth, hourDegree,
 			chanceRainWidth, chanceRain,
