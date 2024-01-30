@@ -136,7 +136,6 @@ func main() {
 		} else {
 			color.Blue(message)
 		}
-		time.Sleep(10)
 	}
 
 	//Table Bottom Border
