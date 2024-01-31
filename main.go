@@ -38,6 +38,12 @@ type Weather struct {
 	}
 }
 
+func headerBorder(length int) {
+	for i := 0; i < length-1; i++ {
+		fmt.Print("-")
+	}
+}
+
 func main() {
 
 	city := os.Args[1]
@@ -91,10 +97,10 @@ func main() {
 		chanceRainWidth, "Chance Rain",
 		conditionWidth, "Condition")
 
+	//Variable for header border length
+	var length = len(header)
 	//Header Upper Border
-	for i := 0; i < len(header)-1; i++ {
-		fmt.Print("-")
-	}
+	headerBorder(length)
 	//Craete Space
 	fmt.Println()
 
@@ -102,9 +108,7 @@ func main() {
 	fmt.Print(header)
 
 	//Header Bottom Border
-	for i := 0; i < len(header)-1; i++ {
-		fmt.Print("-")
-	}
+	headerBorder(length)
 
 	//Create Space
 	fmt.Println("")
@@ -137,9 +141,7 @@ func main() {
 	}
 
 	//Table Bottom Border
-	for i := 0; i < len(header)-1; i++ {
-		fmt.Print("-")
-	}
+	headerBorder(length)
 	//Create Space
 	fmt.Println()
 
